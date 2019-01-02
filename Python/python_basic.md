@@ -10,3 +10,25 @@
 ```python
 n = input()
 ```
+- `sys.stdin`:
+표준 입력을 받는 함수
+```python
+import sys
+
+for i in sys.stdin:
+    print(i, end="")
+```
+
+### (2)  출력
+파이썬에서 출력 하기
+
+- `print()`:
+인자를 출력하는 함수
+```python
+print("Hellow World")
+print("""
+여러줄
+출력하는
+방법
+""")
+```
