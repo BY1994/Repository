@@ -19,13 +19,31 @@ N이 주어졌을 때, N의 사이클의 길이를 구하는 프로그램을 작
 3
 
 최초 작성 2019.01.14 PBY
+최종 제출 2019.01.16 PBY
 """
 number = input()
+original_num = number[:]
 
 if len(number) < 2:
-    number += "0"
+        number = "0" + number
+
+count = 1
 
 while True:
+    number = str(int(number[1]))+ str((int(number[0])+int(number[1]))%10)
 
+    if int(number) == int(original_num):
+        print(count)
+        break
+
+    count += 1
+
+# 1. 처음에 잘못짠 코드
+# while문 안에서 str로 하나씩 바꾸지 않고 왼쪽은 *10, 오른쪽은 %10을 해서 한 번에 합쳐서 하려고 했더니
+# 왼쪽에 0이 사라져버렸다.
+
+# 2. 다음에 잘못짠 코드
+# if문에 int(number) == int(origin) 으로 int비교를 하지 않으면
+# 01과 1의 비교가 되지 않아서 문제가 생기는 것 같다.
 
 # visual studio는 실행시 ctrl + f5
