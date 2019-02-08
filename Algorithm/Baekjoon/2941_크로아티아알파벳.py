@@ -17,18 +17,31 @@ ljes=njak
 6
 
 최초 작성 2019.02.07 PBY
+최종 제출 2019.02.08 PBY
 """
-cro1 = ['c=', 'c-', 'd-', 'lj', 'nj', 's=', 'z=']
-cro2 = 'dz='
 
 s = input()
-count = 0
+cro = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
 
+for c in range(len(cro)):
+    s = s.replace(cro[c], '0')
+
+print(len(s))
+
+"""
+글자 하나씩 돌면서 확인하게 하려고 했으나 너무 복잡했음
+count = 0
 while True:
     if (s[i] + s[i+1]) in cro1:
         count += 1
         s = s[:i] + s[i+2:]
         # 아닌데....
+"""
+
+"""
+인덱스를 이용한다면 어떤 문자열로 바꾸면 되는지도 만들 수 있을 것 같다. (굳이 이 문제는 그렇게까지 필요가 없음)
+cro2 = [1, 2, 3, 4, 5, 6, 7, 8]
+"""
 
 # pycharm은 실행시 alt+shift+f10 (이전 파일 또 실행 shift+f10)
 # visual studio는 실행시 ctrl + f5
