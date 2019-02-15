@@ -27,6 +27,101 @@
 testcase = int(input())
 for tc in range(testcase):
     planets = input().split()
+    distance = int(planets[1]) - int(planets[0])
+    if distance < 3:
+        d = distance
+    else:
+        d = 3
+    check = 0
+    n = 2
+    while d < distance:
+        print(d, distance)
+        if check < n:
+            check += 1
+        else:
+            d += 1
+            n += 1
+            check = 0
+    print(d)
+
+"""
+testcase = int(input())
+for tc in range(testcase):
+    planets = input().split()
+    distance = int(planets[1])-int(planets[0])
+    anslist = [1,1,1]
+    # 리스트에 담지 못한 예외 케이스
+    if distance == 1:
+        anslit = [1]
+    elif distance == 2:
+        anslist = [1,1]
+    
+    for i in range(distance-3):  # 앞의 세 케이스는 지정됨
+    # 체크하는 방법
+        length = len(anslist)//2
+        if (anslist[length - 1] == anslist[length]) and (anslist[length + 1] == anslist[length]):
+            anslist[length] += 1
+        else:
+            # 끝에서 숫자가 2개씩 나오는 경우를 찾음
+            check = 0
+            for idx in range(length, len(anslist)-1):
+                if anslist[idx] == anslist[idx+1]:
+                    anslist[idx] += 1
+                    check = 1
+                    break
+            else:
+                anslist.append(1)
+                
+    print(len(anslist))
+"""
+# 1
+#     
+# 출발 중간 도착 점까지 거리
+# 1 1 (2칸 짜리가 1 개)
+# 1 1 1 (3칸 짜리가 2개)
+# 1 2 1 
+
+# 1 2 1 1 (4칸짜리가 2개)
+# 1 2 2 1
+# 1 2 2 1 1 (5칸 자리가 3개)
+# 1 2 2 2 1
+# 1 2 3 2 1 
+
+# 1 2 3 2 1 1 (6칸 짜리가 3개)
+# 1 2 3 2 2 1
+# 1 2 3 3 2 1
+# 1 2 3 3 2 1 1 (7칸 짜리가 4개)
+# 1 2 3 3 2 2 1
+# 1 2 3 3 3 2 1 
+# 1 2 3 4 3 2 1  
+# 1 2 3 4 3 2 1 1 
+# 1 2 3 4 3 2 2 1
+# 1 2 3 4 3 3 2 1
+# 1 2 3 4 4 3 2 1
+# 1 2 3 4 4 3 2 1 1 
+# 1 2 3 4 4 3 2 2 1
+# 1 2 3 4 4 3 3 2 1
+# 1 2 3 4 4 4 3 2 1
+# 1 2 3 4 5 4 3 2 1
+# 1 2 3 4 5 4 3 2 1 1
+# 1 2 3 4 5 4 3 2 2 1
+# 1 2 3 4 5 4 3 3 2 1
+# 1 2 3 4 5 4 4 3 2 1
+# 1 2 3 4 5 5 4 3 2 1 
+# 1 2 3 4 5 5 4 3 2 1 1 
+# 1 2 3 4 5 5 4 3 2 2 1
+# 1 2 3 4 5 5 4 3 3 2 1
+# 1 2 3 4 5 5 4 4 3 2 1
+# 1 2 3 4 5 5 5 4 3 2 1
+# 1 2 3 4 5 6 5 4 3 2 1
+# 1 2 3 4 5 6 5 4 3 2 1 1
+
+
+"""
+
+testcase = int(input())
+for tc in range(testcase):
+    planets = input().split()
     distance = planets[1]-planets[0]
     anslist = [1, 1]
 
@@ -34,33 +129,7 @@ for tc in range(testcase):
         anslist.insert()
 
     print(len(anslist))
-
-    # 1 1
-    # 1 1 1
-    # 1 2 1
-    # 시작점 1, 끝점 1
-    # 그 사이 차이를 계산
-    # 시작점 2 늘림
-    # 그 다음 자리가 2가 되면 늘림
-    # 3으로 늘리려면 3 2 1 이 성립해야함
-    # 1에서 2로 늘리려면 1 2 1 이 성립해야 하고 그 전까지는 계속 1이어야함
-    # 1 2 1 1 이런 식이어야함
-    # 1 2 2 1 이렇게 늘어날 순 있는데...
-    # 자기랑 같은 수나 자기보다 많은 수로 늘어나는 것
-    # 여기 중간은?
-    # 1 2 2 1 1
-    # 1 2 2 2 1
-
-    # 1 2 3 2 1 이렇게 되어야 3 가능
-    # 1 2 3 2 1 1 이렇게 하나씩 늘려서
-    # 1 2 3 2 2 1 이런식?
-    # 늘어가다가
-    # 1 2 3 3 2 1 합체....
-    # 1 2 3 3 2 1 1
-    # 1 2 3 3 2 2 1
-    # 1 2 3 3 3 2 1
-    # 1 2 3 4 3 2 1 4가 되려면 4 3 2 1 보다 커야함.
-
+"""
 
 # pycharm은 실행시 alt+shift+f10 (이전 파일 또 실행 shift+f10)
 # visual studio는 실행시 ctrl + f5
