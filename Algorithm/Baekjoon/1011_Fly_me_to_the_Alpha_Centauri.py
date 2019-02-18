@@ -22,6 +22,7 @@
 4
 
 최초 작성 2019.02.12 PBY
+최종 제출 2019.02.15
 """
 
 testcase = int(input())
@@ -29,21 +30,56 @@ for tc in range(testcase):
     planets = input().split()
     distance = int(planets[1]) - int(planets[0])
     if distance < 3:
-        d = distance
+        d = station = distance
     else:
-        d = 3
+        d = station = 3
     check = 0
     n = 2
-    while d < distance:
-        print(d, distance)
-        if check < n:
+    while d == 3 or d < distance:
+        if check < 2:
+            if (d + n) > distance: # 같으면 while을 나감.
+                break
+            d += n
             check += 1
+            station += 1
         else:
-            d += 1
             n += 1
             check = 0
-    print(d)
+    print(station)
 
+"""
+종민님 코드
+
+tc = int(input())
+
+def com (dist) :
+    count = 0
+    n=0
+    if dist == 0:
+        return 0
+    for i in range(dist) :
+        if i**2<dist and dist<(i+1)**2 :
+            n=i
+            break
+        elif i**2 == dist :
+            count = 2*i-1
+            return count
+    count = 2*n-1
+ 
+    for i in range(1,n+1) :
+        if dist-n**2-i == 0 :
+            count+=1
+            return count
+    count+=2        
+    return count
+                
+
+for c in range(tc) :
+    x, y = map(int,input().split())
+    dist=y-x
+    print(com(dist))
+    
+"""
 """
 testcase = int(input())
 for tc in range(testcase):
