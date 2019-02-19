@@ -21,9 +21,30 @@ A평소 반상회에 참석하는 것을 좋아하는 주희는 이번 기회에
 10
 
 최초 작성 2019.02.18 PBY
+최종 제출 2019.02.19
 """
 
 testcase = int(input())
+for tc in range(testcase):
+    k = int(input()) # k층
+    n = int(input()) # n호
+    ans = 0
+
+    pre_nlist = [ i+1 for i in range(n)]  # 이전 층의 정보를 리스트로 저장해두기
+    cur_nlist = [0] * n
+    for i in range(k):
+        for j in range(n):
+            cur_nlist[j] = sum(pre_nlist[0:j+1])
+        pre_nlist = cur_nlist[:]
+
+    print(cur_nlist[-1])
+        # ans += (n-i)*(i+1) # 이것도 2층의 경우만 해당한다.
+        # ans += sum(range(1, n+1-i)) * (i+1) # 이건 2층의 경우만 해당한다.
+
+# 0층 1 2 3
+# 1층 1 1+2 1+2+3
+# 3층 1 1+1+2 1+1+2+1+2+3
+# 4층 1 1+1+1+2 1+1+1+2+1+1+2+1+2+3
 
 # pycharm은 실행시 alt+shift+f10 (이전 파일 또 실행 shift+f10)
 # visual studio는 실행시 ctrl + f5
