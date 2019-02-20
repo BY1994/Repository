@@ -25,6 +25,39 @@
 
 # 시간 초과
 testcase = int(input())
+for tc in range(testcase):
+    M, N, x, y = map(int, input().split())
+    bound = M * N
+    if M <= N:  # 짧은 거 기준
+        x2 = y2 = x  # x2 고정
+        count = x2
+        while count < bound:  # 모든 수를 다 돌았는데 없으면, 최소공배수 구하면 더 빠를 듯
+            if x2 == x and y2 == y:
+                break
+            if y2 + M > N:
+                y2 += M - N
+            else:
+                y2 += M
+            count += M
+        else:
+            count = -1
+    else:
+        x2 = y2 = y
+        count = y2
+        while count < bound:
+            if x2 == x and y2 == y:
+                break
+            if x2 + N > M:
+                x2 += N - M
+            else:
+                x2 += N
+            count += N
+        else:
+            count = -1
+    print(count)
+
+# 시간 초과
+testcase = int(input())
 for tc in range(testcase):    
     M, N, x, y = map(int, input().split())
     x2 = y2 = 1 # 첫번째 해
