@@ -26,6 +26,7 @@
 한국정보올림피아드 > KOI 2000 > 초등부 2번 (IM수준)
 
 2019.03.05 PBY 최초작성
+2019.03.06 최종제출
 
 """
 
@@ -47,11 +48,16 @@ for _ in range(studentnum):
     gender, std = list(map(int, input().split()))
     if gender == 1:
         # 배수의 상태 바꾸기 최대 크기에 해당할 때까지 계속 배수 상태 변경
-        cnt = 2
-        while std <= switchnum:
-            switch[std-1] = changestate(switch[std-1])
+        # cnt = 2
+        cur_std = std # 이게 계속 std로만 업데이트되면 배수로 커지는게 아니라 훨씬 커짐..... 커진 수를 계속 더해서 그래서 temp변수 사용
+        while cur_std <= switchnum:
+            switch[cur_std-1] = changestate(switch[cur_std-1])
+            cur_std += std # 배수 계산 공식을 새로 바꿈 => 준혁님 방식
+            """
+            이렇게 하면 계산이 틀리다...
             std *= cnt
             cnt += 1
+            """
     else:
         # 양 옆 가장 넓은 대칭 찾아서 다 바꾸기
         # 내 위치 스위치 바꾸기
@@ -73,3 +79,8 @@ for i in range(0, switchnum, 20):
 
 
 # visual studio는 실행시 ctrl + f5
+
+"""
+배수 때문에 틀린 것인데,
+그걸 못 찾아서 며칠을 헤맸다....
+"""
