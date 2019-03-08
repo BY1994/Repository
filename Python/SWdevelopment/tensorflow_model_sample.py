@@ -1,7 +1,9 @@
 def mymodel(train_url, test_url):
+    
     print("---setting configurations---")
     import tensorflow as tf
     import csv
+    
     # 데이터 로드
     train_data = []
     train_label = []
@@ -20,8 +22,6 @@ def mymodel(train_url, test_url):
     total_batches = 200
 
     # 원-핫 인코딩
-    # train_label_hot = tf.one_hot(train_label, no_classes)
-
     train_label_hot = []
     for row in train_label:
         for num in range(no_classes):
@@ -68,16 +68,12 @@ def mymodel(train_url, test_url):
         for row in csvreader:
             test_data.append(list(map(int, row)))
         
-    #test_data = pd.read_csv('C:\\Users\\BY\\Downloads\\test.csv', header=0)
-
     # 정확도를 계산
     predictions = tf.argmax(logits, 1)
     test_label = session.run([predictions], feed_dict={
         x_input: test_data
     })
     print("----saving data----")
-    # with open
-    # f_result.write("" %())
     save_url = test_url.split('/')[:-1]
     with open('/'.join(save_url)+'/submission.csv', mode='w', newline='\n') as csvfile:
         tensor_result = csv.writer(csvfile, delimiter=',')
@@ -85,6 +81,5 @@ def mymodel(train_url, test_url):
         for line in range(len(test_label[0])):
             tensor_result.writerow([str(line+1), str(test_label[0][line])])
 
-    #print('test_label : ', test_label[0])
     session.close()
     print("---session closed---")
