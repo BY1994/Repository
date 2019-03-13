@@ -21,8 +21,40 @@
 83
 
 최초 작성 2019.02.19 PBY
+최종 제출 2019.03.13 PBY 와우!!!!!!!!!!!!!
 """
 
+testcase = int(input())
+for tc in range(testcase):
+    M, N, x, y = map(int, input().split())
+    ans = x
+# while로 빼는 것으로 구현하자 => 성공!!!!!!!!!!!!!!!!!!!
+    while ans > N:
+        ans -= N
+#    if ans > N:
+#        ans %= N # N이 1인 경우 안 된다!!!!!!! => 이거 때문에 모든 반례에 걸렸다!!!!!!!!!!!
+    cycle = x
+    if ans == y: # 이 조건을 안 넣어서 틀렸다고 생각했는데...
+        print(cycle)
+    else:
+        while True:
+            cycle += M
+            ans += M
+            while ans > N:
+                ans -= N
+#            if ans > N:
+#                ans %= N
+                    
+            if ans == y:
+                print(cycle)
+                break
+
+            # 종료 조건은 최대 cycle
+            if cycle > M*N:
+                print(-1)
+                break
+        
+"""
 # 시간 초과
 testcase = int(input())
 for tc in range(testcase):
@@ -76,6 +108,45 @@ for tc in range(testcase):
             y2 = 1
         count += 1
     print(count)
+"""
 
+"""
+https://www.acmicpc.net/board/view/21503
+
+15
+40000 39999 39999 39998
+40000 39999 40000 39999
+40000 40000 40000 39999
+40000 39998 40000 39997
+39999 2 39998 2
+3 40000 3 39999
+40000 3 40000 3
+8 2 4 2
+10 12 2 12
+12 10 12 10
+12 10 1 1
+12 6 12 6
+10 1 5 1
+1 10 1 5
+1 1 1 1
+
+답:
+1599959999
+1599960000
+-1
+-1
+39998
+39999
+120000
+4
+12
+60
+1
+12
+5
+5
+1
+
+"""
 # pycharm은 실행시 alt+shift+f10 (이전 파일 또 실행 shift+f10)
 # visual studio는 실행시 ctrl + f5
