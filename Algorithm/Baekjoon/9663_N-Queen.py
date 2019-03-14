@@ -28,14 +28,22 @@ def nqueens(y, depth):
     else:
         # 재귀함수 구현
         # 대각선 위치 체크하는 함수 따로 두기
-        nexty = checkdiagonal(depth) # 그 때의 used를 가지고 체크
+        nextys = checkdiagonal(depth) # 그 때의 used를 가지고 체크
         # 다음 가능한 위치, 지금까지 온 used 변수 이용 - 순열
         used[depth] = 1
-        nqueens(nexty)
+        for nexty in nextys:
+            nqueens(nexty)
         used[depth] = 0
         
-        
-
+def checkdiagonal(depth): 
+    # 그 때의 used를 가지고 체크
+    nextys_temp = [1] * N # 갈 수 있다고 체크
+    for i in range(depth):
+        if used[i] == 1: # used가 체크되었으면
+            # 왼쪽 대각선 확인
+            
+            # 오른쪽 대각선 확인
+    return 
 
 
 # visual studio는 실행시 ctrl + f5
