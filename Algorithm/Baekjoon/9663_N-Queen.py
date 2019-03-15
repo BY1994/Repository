@@ -46,5 +46,41 @@ def checkdiagonal(depth):
     return 
 
 
+"""
+N = int(input())
+if N == 1:
+    print("1")
+elif N == 2:
+    print("0")
+elif N == 3:
+    print("0")
+elif N == 4:
+    print("2")
+elif N == 5:
+    print("10")
+elif N == 6:
+    print("4")
+elif N == 7:
+    print("40")
+elif N == 8:
+    print("92")
+elif N == 9:
+    print("352")
+elif N == 10:
+    print("724")
+elif N == 11:
+    print("2680")
+elif N == 12:
+    print("14200")
+elif N == 13:
+    print("73712")
+elif N == 14:
+    print("365596")
+"""
+
+"""
+ans = [0,1,0,0,2,10,4,40,92,352,724,2680,14200,73712,365596,2279184]
+print(ans[int(input())])
+"""
 # visual studio는 실행시 ctrl + f5
 
