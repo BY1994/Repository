@@ -18,7 +18,7 @@ def copy_files(prefix_str, range_start, range_end, target_dir):
     for image_path in image_paths:
         shutil.copy(image_path, dest_dir)
 
-
+"""
 # 실습을 위해 고양이와 개 이미지를 1,000개만 사용
 print("==========================")
 print("====copy image files======")
@@ -26,7 +26,7 @@ copy_files('dog', 0, 10, 'train')
 copy_files('cat', 0, 10, 'train')
 copy_files('dog', 10, 14, 'test')
 copy_files('cat', 10, 14, 'test')
-
+"""
 
 # 간단한 CNN으로 벤치마킹. 교재의 simple_cnn 모델
 print("==========================")
@@ -37,11 +37,12 @@ test_dir = os.path.join(work_dir+'data/', 'test')
 no_classes = 2
 no_validation = 8 #800
 epochs = 2
-batch_size = 200
+batch_size = 2 #200
 no_train = 20 #2000
 no_test = 8 #800
 input_shape = (image_height, image_width, 3)
-epoch_steps = no_train // batch_size
+epoch_steps = no_train // batch_size # 여기가 0이 되어버리면
+# AttributeError: 'ProgbarLogger' object has no attribute 'log_values' 에러 발생
 test_steps = no_test // batch_size
 
 def simple_cnn(input_shape):
@@ -61,7 +62,8 @@ def simple_cnn(input_shape):
     model.add(tf.keras.layers.Dropout(rate=0.3))
 
     model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(units=1024, activation='relu'))
+    model.add(tf.keras.layers.Dense(units=32, activation='relu')) # 1024
+    # tensorflow.python.framework.errors_impl.ResourceExhaustedError: OOM when allocating tensor with shape[799350,1024] and type float on /job:localhost/replica:0/task:0/device:CPU:0 by allocator cpu
     model.add(tf.keras.layers.Dropout(rate=0.3))
     model.add(tf.keras.layers.Dense(units=no_classes, activation='softmax'))
     model.compile(loss=tf.keras.losses.categorical_crossentropy,
