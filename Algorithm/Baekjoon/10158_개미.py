@@ -13,8 +13,76 @@
 출력은 t 시간 후에 개미의 위치 좌표 (x,y)의 값 x와 y를 공백을 사이에 두고 출력한다.
 
 최초작성 2019.03.15 PBY
+수정 2019.03.23
+
+입력
+6 4
+4 1
+8
+
+6 4
+4 3
+2
+
+2 2
+1 1
+14
+
+3 3
+2 2
+5
+
+3 3
+1 1
+0
+
+0 0
+0 0
+0
 """
 
+def antMove(curp,curq, pd, qd):
+    global p, q, w, h, t
+    global m
+    if m == t:
+        return
+    m += 1
+    if (curp == w and curq == h) or (curp == 0 and curq == 0) or (curp == w and curq == 0) or (curp == 0 and curq == h):
+        pd = -pd
+        qd = -qd # 둘 다 방향 전환
+    elif curp == w or curp == 0:
+        pd = -pd
+    elif curq == h or curq == 0:
+        qd = -qd
+
+    if [curp + pd, curq + qd, pd, qd] in Moves:
+        Moves.append([curp+pd, curq+qd, pd, qd])
+        return
+    Moves.append([curp+pd, curq+qd, pd, qd])
+    antMove(curp+pd, curq+qd, pd, qd)
+
+w, h = map(int, input().split())
+p, q = map(int, input().split())
+t = int(input())
+m = 0
+Moves = [[p,q, 1, 1]]
+antMove(p, q, 1, 1)
+if t < len(Moves):
+    ans = Moves[t]
+else:
+    for m in range(len(Moves)):
+        if Moves[-1] == Moves[m]:
+            start = m
+            break
+    end = len(Moves)-1
+    if (t-(m-1))%(end-start) == 0:
+        ans = Moves[end-1]
+    else:
+        ans = Moves[start+(t-(m-1))%(end-start)-1]
+print(ans[0], ans[1])
+
+
+"""
 w, h = list(map(int, input().split()))
 p, q = list(map(int, input().split()))
 t = int(input())
@@ -64,3 +132,4 @@ for time in range(t):
             direct = 1
 
 print(x, y)
+"""

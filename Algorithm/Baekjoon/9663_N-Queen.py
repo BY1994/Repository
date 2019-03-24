@@ -12,8 +12,66 @@ N이 주어졌을 때, 퀸을 놓는 방법의 수를 구하는 프로그램을 
 첫째 줄에 퀸 N개를 서로 공격할 수 없게 놓는 경우의 수를 출력한다.
 
 최초작성 2019.03.13 PBY
+수정 2019.03.23 PBY => 시간초과
 """
+import copy
 
+
+def NQueen(array, xy):
+    global ans, N
+    if xy[0] == N-1:
+        ans += 1
+        return
+
+    newchess = copy.deepcopy(array)
+    candidates = checkPossible(newchess, xy)
+    for c in candidates:
+        NQueen(newchess, c)
+
+def checkPossible(array, xy):
+    global N
+    # 세로줄 다 체크하기
+    for j in range(N):
+        array[j][xy[1]] = 1
+
+    # 대각선 왼쪽 아래 체크하기
+    j = xy[1]
+    for i in range(xy[0]+1, N):
+        if j > 0:
+            array[i][j-1] = 1
+            j -= 1
+            
+    # 대각선 오른쪽 아래 체크하기
+    j = xy[1]
+    for i in range(xy[0]+1, N):
+        if j < N-1:
+            array[i][j+1] = 1
+            j += 1
+
+    # 체크하고 남은 가능한 candidates 찾기
+    candidates = []
+    for j in range(N):
+        if array[xy[0]+1][j] == 0:
+            candidates.append([xy[0]+1, j])
+
+    return candidates
+
+
+N = int(input())
+chess = [[0 for _ in range(N)] for __ in range(N)]
+ans = 0
+
+# 처음 갈 수 있는 위치들 체크해서 넘기기
+for i in range(N):
+    newchess = copy.deepcopy(chess)
+    candidates = checkPossible(newchess, (0, i))
+    for c in candidates:
+        NQueen(newchess, c)
+
+print(ans)
+
+"""
+작성하다 만 코드
 N = int(input())
 cnt = 0 # 경우의 수
 used = [0]*N
@@ -45,7 +103,7 @@ def checkdiagonal(depth):
             
             # 오른쪽 대각선 확인
     return nextys_temp
-
+"""
 
 """
 N = int(input())
