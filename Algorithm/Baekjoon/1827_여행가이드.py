@@ -4,11 +4,15 @@ cos theta 가 직각 삼각형의 아랫변
 sin theta가 직각 삼각형의 세로...!
 """
 
+# 근의 공식 몇 번 틀렸고 ㅠㅠ
+# 그 다음에 people을 원래 값에서 순열마다 자꾸 더하게 해서!!!! 값이 자꾸 바뀐채로 다음 순열을 돌았따!!!
+
+import copy
 N = int(input())
 mySpeed = float(input())
-people = []
+people_origin = []
 for _ in range(N):
-    people.append(list(map(float, input().split())))
+    people_origin.append(list(map(float, input().split())))
 
 totalminvalue = 10**6
 # 내 시작 좌표
@@ -16,6 +20,8 @@ import math
 # 모든 순열을 다 가봐야한다.
 import itertools
 for i in itertools.permutations(range(N)):
+    # 매번 복사하기
+    people = copy.deepcopy(people_origin) # 이거 대신 밑에서 totalt를 빼면 되는 거 아닌가?
     Iam = [0, 0]
     totalt = 0
     maxvalue = 0
@@ -58,13 +64,15 @@ for i in itertools.permutations(range(N)):
         Iam[0] = people[j][0] + people[j][2] * t * math.cos(people[j][3])
         Iam[1] = people[j][1] + people[j][2] * t * math.sin(people[j][3])
         totalt += t
+        
         # 그 사람을 잡음. 그 사람이 그 때부터 버스로 간다.
         # 버스까지 가는데 걸리는 시간은 거기서 버스까지 거리 / 속도
         curvalue = totalt + math.sqrt(Iam[0] **2 + Iam[1] ** 2) / people[j][2]
         if maxvalue < curvalue:
             maxvalue = curvalue
         # 다음 사람 잡으러 감  -> 다음 for문
+        
     if totalminvalue > maxvalue:
         totalminvalue = maxvalue
 
-print(totalminvalue)        
+print(round(totalminvalue))        
