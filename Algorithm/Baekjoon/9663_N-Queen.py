@@ -14,6 +14,47 @@ N이 주어졌을 때, 퀸을 놓는 방법의 수를 구하는 프로그램을 
 최초작성 2019.03.13 PBY
 수정 2019.03.23 PBY => 시간초과
 """
+
+# 순열
+def nqueen(k, n):
+    global ans
+    if k == n: # 종료조건
+        ans += 1
+        #print("찾았다")
+        return
+
+    #if ans > 0:
+    #    return
+    
+    for i in range(n): # 세로마다
+        if used[i] == False: # 세로, 열
+            # 대각선체크
+            for j in range(k):
+                if j-perm[j] == k-i: # 오른쪽 아래 대각선
+                    break
+                if -(j-k) == perm[j]-i: #왼쪽 아래 대각선
+                    break
+            else:
+                used[i] = True
+                perm[k] = i
+                nqueen(k+1, n)
+                used[i] = False
+
+# 대각선 배열 저장 =>perm
+N = int(input())
+used = [False]*N
+perm = [0]*N
+ans = 0
+for i in range(N):
+    used[i] = True
+    perm[0] = i
+    nqueen(1, N)
+    used[i] = False
+
+
+print(ans)
+"""
+# 시간초과
 import copy
 
 
@@ -69,6 +110,7 @@ for i in range(N):
         NQueen(newchess, c)
 
 print(ans)
+"""
 
 """
 작성하다 만 코드
