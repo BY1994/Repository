@@ -23,8 +23,12 @@
 1
 """
 
+# visited로 인덱스 접근을 안해서 c not in  엄청 오래 걸렸을 거고
+# 가지치기도 넣지 않았다.
 
 def findOthers(std, h, cur):
+    if arraynum[0][std] + arraynum[1][std] == N-1: # 가지치기. 이 작업을 안해서 시간초과?
+        return
     # 다음 candidates 찾기
     if arraynum[h-1][cur] > 0:
         for c in array[h-1][cur]:
@@ -60,7 +64,7 @@ for tc in range(T):
                             if c2 not in array[0][students]:
                                 arraynum[0][students] += 1
                                 array[0][students].append(c2)
-
+        
         # 첫번째 예제는 c < students 가 없나봄
         if arraynum[1][students] > 0:
             for c in array[1][students]:
