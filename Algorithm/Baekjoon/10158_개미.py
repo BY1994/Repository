@@ -19,37 +19,110 @@
 6 4
 4 1
 8
+답 0 1
 
 6 4
 4 3
 2
+답 6 3
 
 2 2
 1 1
 14
+답 1 1
 
 3 3
 2 2
 5
+답 1 1
 
 3 3
 1 1
 0
+답 1 1
 
 0 0
 0 0
 0
+
+# 런타임 에러 찾음!!!!!!!
+6 4
+0 0
+100303010 # 이런식으로 들어가면 - 값으로 무한대로 내려감....
+
 """
 
+# 2 억번을 다 돌 필요 없이 점프해도 될 듯
+w, h = map(int, input().split())
+p, q = map(int, input().split())
+t = int(input())
+m = 0
+pd = 1
+qd = 1
+while m < t:
+    if m < t-max(w,h):
+        if pd == 1: # p 방향이 1
+            if qd == 1: 
+                # 더 빨리 벽에 부딪히는 경우
+                if w-p >= h-q: # p가 더 빨리 부딪힘
+                    m += w-p
+                    p += w-p
+                    q += w-p
+                else:
+            else:
+                if w-p >= q:
+    else:
+        p = p+pd # 이걸 위에 올리면 0 0 에서 거꾸로 가는 경우 방지
+        q = q+qd
+        m += 1
+        if p == w or p == 0:
+            pd = -pd
+        if q == h or q == 0:
+            qd = -qd
+# while문 나오면 m==t인 순간
+print(p, q)
+
+
+"""
+# 시간초과 나는 코드 짧게 고친 버전
+w, h = map(int, input().split())
+p, q = map(int, input().split())
+t = int(input())
+m = 0
+pd = 1
+qd = 1
+while m < t:
+    p = p+pd # 이걸 위에 올리면 0 0 에서 거꾸로 가는 경우 방지
+    q = q+qd
+    m += 1
+    if p == w or p == 0:
+        pd = -pd
+    if q == h or q == 0:
+        qd = -qd
+# while문 나오면 m==t인 순간
+print(p, q)
+"""
+
+"""
 def antMove(curp,curq, pd, qd):
     global p, q, w, h, t
+    print(curp, curq)
     global m
     if m == t:
         return
     m += 1
-    if (curp == w and curq == h) or (curp == 0 and curq == 0) or (curp == w and curq == 0) or (curp == 0 and curq == h):
-        pd = -pd
-        qd = -qd # 둘 다 방향 전환
+    if curp ==0 and curq ==0:
+        pd = 1
+        qd = 1
+    elif curp == w and curq == h:
+        pd = -1
+        qd = -1 # 둘 다 방향 전환
+    elif curp == w and curq == 0:
+        pd = -1
+        qd = 1
+    elif curp == 0 and curq == h:
+        pd = 1
+        qd = -1
     elif curp == w or curp == 0:
         pd = -pd
     elif curq == h or curq == 0:
@@ -80,6 +153,23 @@ else:
     else:
         ans = Moves[start+(t-(m-1))%(end-start)-1]
 print(ans[0], ans[1])
+
+"""
+
+"""
+a,b=map(int,input().split())
+c,d=map(int,input().split())
+t=int(input())
+c+=t
+d+=t
+c%=a+a
+d%=b+b
+if c>a:
+    c=a+a-c
+if d>b:
+    d=b+b-d
+print(c,d)
+"""
 
 
 """
