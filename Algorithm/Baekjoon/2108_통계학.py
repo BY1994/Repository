@@ -60,6 +60,13 @@ print('cnt',cnt)
 #for n in numbers:
 #    cnt[n-1] += 1
 
+# 한 번 최빈값을 구하고
+# 다시 돌면서 최빈값들을 리스트에 받아오기 => 이 과정을 한 번에 가능
+# 하면서 LIST에 넣으면 됨
+# 정렬하고 두 번째로 작은 값 찾기
+
+# 아니면 labmda함수로 한 번에 두 개 key를 가지고 정렬
+
 # 제일 큰 값
 max_ind_value = [0, 0]
 for n in cnt:

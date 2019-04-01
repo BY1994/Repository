@@ -11,11 +11,58 @@ A
 
 https://www.acmicpc.net/board/view/17702
 
+4
+DOG
+GOD
+GOOD
+DOLL
+답은 2
 """
+
+    
+# 한 글자가 빠지거나, 한 글자가 더해지거나, 한 글자가 replace 된 것
+# DOG
+# DO
+# DG
+# OG
+# LOG
+
+N = int(input())
+word1 = input()
+word1_alpha = [0] * 26
+for w1 in word1:
+    word1_alpha[ord(w1)-ord('A')] += 1
+
+cnt = 0
+for _ in range(N-1):
+    word2 = input()
+    word2_alpha = [0]*26
+    for w2 in word2:
+        word2_alpha[ord(w2)-ord('A')] += 1
+    # w1과 w2의 차이를 계산했을 때,
+    # 둘 중 하나만 1 이나 -1이 있거나, 둘다 1, -1이 동시에 존재하는 경우
+    pone = 0; mone = 0
+    for check in range(26):
+        word2_alpha[check] -= word1_alpha[check]
+        if word2_alpha[check] >= 2 or word2_alpha[check] <= -2:
+            break
+        if word2_alpha[check] == 1:
+            pone +=1
+        elif word2_alpha[check] == -1:
+            mone += 1
+    else:
+        if pone <= 1 and mone <= 1:
+            cnt += 1
+print(cnt)
+
 
 # 반례들을 못 잡으면 그냥 진짜로 구현하는 건 어떨까
 # find 써서 그 위치를 빼고 ' ' + ' '  이런 식으로 잘라내기로
+# ABB -> A면? BBB, A면?
 
+
+"""
+# 통과 못하는 케이스 존재.... -> 예제 케이스
 N = int(input())
 word1 = input()
 word1_set = set(word1) # 각 단어별 개수
@@ -38,6 +85,7 @@ for _ in range(N-1):
         if sum(count) <= 2: # 차이가 2개 이하 AB, CB의 경우 차이가 2개일 것.
             cnt += 1
 print(cnt)
+"""
 
 # 틀렸습니다.
 """

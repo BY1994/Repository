@@ -2,12 +2,14 @@
 # 입국심사 문제
 # 이분탐색
 
+import math
+
 N, M = map(int, input().split())
 tks = []
 for _ in range(N):
     tks.append(int(input()))
-left = 0
-right = min(tks)*M # 최소의 시간으로 M명이 다 서는 경우
+left = min(tks)*M//N# 0 # 모두가 가장 짧은 tk라고 가정했을 때
+right = math.ceil(max(tks)*M/N)# min(tks)*M # 최소의 시간으로 M명이 다 서는 경우
 people = 0
 # 이진 탐색
 while True:
@@ -25,3 +27,25 @@ while True:
     elif people < M:
         left = middle+1
 print(ans)
+
+
+"""
+2 6
+7
+10
+
+7 10
+3
+8
+3
+6
+9
+2
+4
+
+3 4
+2
+2
+2
+
+"""
