@@ -14,7 +14,8 @@
 0 0 0 0 0 0 0 0 0 0 0 0
 """
 
-# deque로 구현해보기
+# deque로 구현해보기 => 시간초
+"""
 from collections import deque
 N = int(input())
 home = []
@@ -48,6 +49,7 @@ while q:
             visited[x+1][y] += 1
             q.append([x+1, y, 2])
 print(visited[N-1][N-1])
+"""
 
 """
 # 뭔가 해보려다가 실패
