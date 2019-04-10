@@ -30,6 +30,82 @@
 
 """
 
+# 더 간단하게 짜본 코드
+from collections import deque
+
+def findFish(x, y, size):
+    global N
+    # 모든 위치 별로 거리를 다 저장할 것
+    dist = [[401 for _ in range(N)] for __ in range(N)]
+    dist[x][y] = 0 # 처음 내 거리는 0
+    q = deque([[x, y]])
+    lenq = len(q)
+    while q:
+        for i in range(lenq):
+            nextx, nexty = q.popleft()
+            for d in range(4):
+                if 0 <= nextx+dx[d] < N and 0 <= nexty+dy[d] < N:
+                    if dist[nextx+dx[d]][nexty+dy[d]] == 401: # 아직 방문 안함
+                        if sea[nextx+dx[d]][nexty+dy[d]] <= size:
+                            dist[nextx+dx[d]][nexty+dy[d]] = dist[nextx][nexty] + 1
+                            q.append([nextx+dx[d], nexty+dy[d]])
+        lenq = len(q)
+
+    # 큐를 다 돌고 나면 모든 지점의 거리가 정해진다.
+    mindist = 401
+    check = 0
+    for i in range(N):
+        for j in range(N):
+            if dist[i][j] < mindist and 0 < sea[i][j] < size: # 그냥 빈 공간인지 내가 먹을 수 있는 물고기인지 확인
+                check = 1
+                mindist = dist[i][j]
+                minindex = [i, j, mindist]
+
+    if check == 0:
+        return False
+    else:
+        return minindex
+
+
+
+N = int(input())
+sea = []
+for _ in range(N):
+    sea.append(list(map(int, input().split())))
+
+# 상어 위치 찾기
+for i in range(N):
+    for j in range(N):
+        if sea[i][j] == 9:
+            me = [i, j]
+            sea[i][j] = 0 # 상어 빼내기
+
+t = 0
+size = 2
+eat = 0
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+while True:
+    fish = findFish(me[0], me[1], size)
+    if fish == False:
+        break
+    me[0] = fish[0]; me[1] = fish[1]
+    sea[fish[0]][fish[1]] = 0 # 물고기 사라짐
+    eat += 1
+    if eat == size:
+        size += 1
+        eat = 0
+    t += fish[2]
+
+print(t)
+
+
+
+
+
+# 통과는 했으나 시간이 제일 느렸다.
+"""
 from collections import deque
 
 dx = [-1, 1, 0, 0]
@@ -127,3 +203,4 @@ while possible == 1:
 
 print(t)
 
+"""
