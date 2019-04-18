@@ -33,9 +33,10 @@ for loca in range(C): # 낚시왕의 위치 변화
 
     # 상어들의 이동
     for s in sharks:
+        if sharks[s][3] == 1
+            d = sharks[s][0]+dx[sharks[s][2]] % ((N-1)*2)
+
         # (N-1)*2 넘어가면.... % (N-1)*2
-        if dx[sharks[s][2]] >
-            nextd =
         if 0 <= sharks[s][0]+dx[sharks[s][2]] < R and 0 <= sharks[s][1]+dy[sharks[s][2]] < C: # 이동 가능하면
             sharks[s][0] += dx[sharks[s][2]]
             sharks[s][1] += dy[sharks[s][2]]
