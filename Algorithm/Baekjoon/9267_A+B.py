@@ -9,6 +9,14 @@ YES
 NO
 3 4 17
 YES
+
+만들어지는 과정
+3 4 17 
+3 7 17 b += a
+10 7 17 a += b
+17 7 17 a += b
+
+
 """
 
 a, b, s = map(int, input().split())
