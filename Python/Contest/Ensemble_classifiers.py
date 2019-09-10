@@ -8,6 +8,11 @@ from sklearn.metrics import accuracy_score
 # from sklearn.datasets import make_moons
 ​
 # load data (load csv)
+import pandas as pd
+data = pd.read_csv("AFSNT.csv", encoding="cp949")
+# data.head()
+data.drop(['REG', 'IRR', 'ATT', 'DRR', 'CNL', 'CNR'], axis=1, inplace=True)
+
 X, y = make_moons(n_samples=500, noise=0.30, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
