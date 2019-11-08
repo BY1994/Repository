@@ -51,10 +51,6 @@
 3
 */
 
-//extern void initUser(int N);
-//extern void makeLabRoom(int id, int stR, int stC, int h, int w, int evr, int evc);
-//extern int getShortestPath(int s, int e);
-
 // 모서리에서 모서리 뛰어다님
 // 그렇게 풀면 안 됨. 거기가 누군가 지나다니는 EV 길이어야만 옮겨타는 것이다.
 
@@ -76,11 +72,6 @@ int wrptr, rdptr;
 int dx[4] = { 0, 0, 1, -1 }; // 동서남북 진행방향별 다음 위치
 int dy[4] = { 1, -1, 0, 0 };
 
-//int checkx[4] = { 1, -1, 1, -1 }; // 필요한 건물 외벽
-//int checky[4] = { 1, -1, -1, 1 };
-int checkx[4] = { 1, -1, 0, 0 }; // 필요한 건물 외벽
-int checky[4] = { 0, 0, -1, 1 };
-
 
 ///=============== user.cpp ===============
 void initUser(int tableSize) {
@@ -95,12 +86,11 @@ void initUser(int tableSize) {
 }
 
 void makeLabRoom(int id, int sr, int sc, int h, int w, int vr, int vc) {
-	// 연구실 표시 (그 위치 그대로 하지 말기)
-	//labs[id][0] = vr, labs[id][1] = vc;
 
 	// 2차원 맵에 연구실 표시 1, 모서리 표시 2 EV 위치 표시 x
 	for (int i = sr; i < sr + h; i++)
 		for (int j = sc; j < sc + w; j++) mymap[i][j] = 1; // 여긴 연구실
+
 	// 모서리 인덱스
 	mymap[sr - 1][sc - 1] = 2, mymap[sr-1][sc+w] = 2, mymap[sr+h][sc-1] = 2, mymap[sr+h][sc+w] = 2;
 	
@@ -137,24 +127,10 @@ int getShortestPath(int s, int e) {
 	visited[qd[wrptr]][qx[wrptr]][qy[wrptr]] = 1; // 그 위치 방문한 거!
 	wrptr++;
 
-	// 그 위치가 누군가의 모서리면 다른 방향도 더!
-	//if (mymap[qx[0]][qy[0]] == 2)
-
 	while (rdptr < wrptr)
 	{
 		int x = qx[rdptr], y = qy[rdptr], d = qd[rdptr], t = qt[rdptr];
 		rdptr++;
-
-		//printf("x %d y %d d %d t %d\n", x, y, d, t);
-
-		// 다음 길이 모서리 일 때 4방향 건물 체크해서 넣음 (근데 이동하는 건 아님 방향 전환만)
-		//if (x + dx[d] < 1 || x + dx[d] > N || y + dy[d] < 1 || y + dy[d] > N) continue;// 벽체크 안 했는데 왜 여태 오류 안 났지...
-				
-		// 이제 어려운 조건 필요없다. possibility 맵을 따로 만들었기 때문에
-		//if (mymap[x + dx[d]+ checkx[d]][y + dy[d]+ checky[d]] != 1 && mymap[x + dx[d]][y + dy[d]] != 2) continue;// 외벽에 건물 있고			
-		
-		// 얘는 건물아니면 무조건 모서리여야한다...
-		//if (visited[d][x + dx[d]][y + dy[d]] == 1) continue;	// 방문 안 했고
 
 		// 만일 모서리라면 => 나한테 들어오는 방향으로 수정했으니, 모서리에서 나가는 4방향을 조사해줘야한다.
 		if (mymap[x][y] == 2)
@@ -164,39 +140,19 @@ int getShortestPath(int s, int e) {
 				if (poss[id][x + dx[id]][y + dy[id]] != 1) continue; // 갈 수 없는 길이면 안 감
 				if (visited[id][x + dx[id]][y + dy[id]] == 1) continue;
 
-				//if (mymap[x + dx[d] + dx[id] +checkx[id]][y + dy[d] + dy[id]+checky[id]] != 1) continue; // 모서리에서 모서리 점프 방지
-
 				qx[wrptr] = x + dx[id], qy[wrptr] = y + dy[id], qd[wrptr] = id, qt[wrptr] = t + 1; // 돌리는 건 시간 안 넣음 // 이건 가면서 돌리는 거라서 넣어야한다 ㅠㅠㅠ 그 자리 그대로가 아니라 dx[d]로 진행한 거니까!!
 				visited[id][x + dx[id]][y + dy[id]] = 1;
 				wrptr++;
+
 				// 모서리는 EV 앞이 아니라고 했으니까 체크 안 함
 				// 이제 모서리 다음 장소를 가리키도록 수정 체크했으니까 체크해야함!!
 				if (x + dx[id] == labs[e][0] && y + dy[id] == labs[e][1] && id == labs[e][2]) return t + 2;
 			}
 		}
 
-		/*
-		if (mymap[x + dx[d]][y + dy[d]] == 2)
-		{
-			for (int id = 0; id < 4; id++)
-			{
-				if (poss[id][x + dx[d]][y + dy[d]] != 1) continue; // 갈 수 없는 길이면 안 감
-				if (visited[id][x+dx[d]][y+dy[d]] == 1) continue;				
-
-				//if (mymap[x + dx[d] + dx[id] +checkx[id]][y + dy[d] + dy[id]+checky[id]] != 1) continue; // 모서리에서 모서리 점프 방지
-				
-				qx[wrptr] = x+dx[d], qy[wrptr] = y+dy[d], qd[wrptr] = id, qt[wrptr] = t+1; // 돌리는 건 시간 안 넣음 // 이건 가면서 돌리는 거라서 넣어야한다 ㅠㅠㅠ 그 자리 그대로가 아니라 dx[d]로 진행한 거니까!!
-				visited[id][x+dx[d]][y+dy[d]] = 1;
-				wrptr++;
-				// 모서리는 EV 앞이 아니라고 했으니까 체크 안 함
-			}
-		}
-		*/
 		else
 		{
 			if (poss[d][x + dx[d]][y + dy[d]] != 1) continue; // 이걸로 깔끔하게 정리
-			// ????? 여태 건물 뚫고 다님?????
-			//if (mymap[x + dx[d]][y + dy[d]] == 1) continue;
 
 			// 진행 방향 그대로 
 			qx[wrptr] = x + dx[d], qy[wrptr] = y + dy[d], qd[wrptr] = d, qt[wrptr] = t + 1;
