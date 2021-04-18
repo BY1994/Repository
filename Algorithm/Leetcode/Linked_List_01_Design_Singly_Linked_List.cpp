@@ -12,6 +12,7 @@ typedef struct _MyList{
 
 typedef struct {
     MyList * Head;
+    int size;
     int buf_ind;
     MyList buf[2021];
 } MyLinkedList;
@@ -21,6 +22,7 @@ void myLinkedListAdd(MyLinkedList* obj, MyList *prev, int val) {
     obj->buf[obj->buf_ind].next = prev->next;
     prev->next = &(obj->buf[obj->buf_ind]);
     obj->buf_ind++;
+    obj->size++;
 }
 
 /** Initialize your data structure here. */
@@ -31,6 +33,7 @@ MyLinkedList* myLinkedListCreate() {
     LinkedList->Head = &(LinkedList->buf[0]);
     LinkedList->Head->next = NULL;
     LinkedList->buf_ind = 1;
+    LinkedList->size = 0;
     
     return LinkedList;
 }
@@ -50,14 +53,6 @@ void myLinkedListAddAtHead(MyLinkedList* obj, int val) {
 	myLinkedListAdd(obj, obj->Head, val);
 }
 
-/** Append a node of value val to the last element of the linked list. */
-void myLinkedListAddAtTail(MyLinkedList* obj, int val) {
-	MyList *p = obj->Head;
-	for (; p->next; p=p->next);
-
-	myLinkedListAdd(obj, p, val);
-}
-
 /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
 void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
     int current = 0;
@@ -73,6 +68,11 @@ void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
 	}
 }
 
+/** Append a node of value val to the last element of the linked list. */
+void myLinkedListAddAtTail(MyLinkedList* obj, int val) {
+	myLinkedListAddAtIndex(obj, obj->size, val);
+}
+
 /** Delete the index-th node in the linked list, if the index is valid. */
 void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
     int current = 0;
@@ -80,6 +80,7 @@ void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
     for (MyList *p = obj->Head->next; p; p=p->next) {
         if (current == index) {
             prev->next = p->next;
+            obj->size--;
             return;
         }
         prev = p;
