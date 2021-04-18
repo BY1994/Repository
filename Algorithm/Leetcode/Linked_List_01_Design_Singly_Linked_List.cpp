@@ -16,6 +16,13 @@ typedef struct {
     MyList buf[2021];
 } MyLinkedList;
 
+void myLinkedListAdd(MyLinkedList* obj, MyList *prev, int val) {
+    obj->buf[obj->buf_ind].val = val;
+    obj->buf[obj->buf_ind].next = prev->next;
+    prev->next = &(obj->buf[obj->buf_ind]);
+    obj->buf_ind++;
+}
+
 /** Initialize your data structure here. */
 
 MyLinkedList* myLinkedListCreate() {
@@ -28,12 +35,10 @@ MyLinkedList* myLinkedListCreate() {
     return LinkedList;
 }
 
-//#include <stdio.h>
 /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
 int myLinkedListGet(MyLinkedList* obj, int index) {
     int current = 0;
     for (MyList *p = obj->Head->next; p; p=p->next) {
-    	//printf("get %d\n", p->val); 
         if (current == index) return p->val;
         current++;
     }
@@ -42,21 +47,15 @@ int myLinkedListGet(MyLinkedList* obj, int index) {
 
 /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
 void myLinkedListAddAtHead(MyLinkedList* obj, int val) {
-    obj->buf[obj->buf_ind].val = val;
-    obj->buf[obj->buf_ind].next = obj->Head->next;
-    obj->Head->next = &(obj->buf[obj->buf_ind]);
-    obj->buf_ind++;
+	myLinkedListAdd(obj, obj->Head, val);
 }
 
 /** Append a node of value val to the last element of the linked list. */
 void myLinkedListAddAtTail(MyLinkedList* obj, int val) {
 	MyList *p = obj->Head;
-    for (; p->next; p=p->next);
+	for (; p->next; p=p->next);
 
-    obj->buf[obj->buf_ind].val = val;
-    obj->buf[obj->buf_ind].next = p->next;
-    p->next = &(obj->buf[obj->buf_ind]);
-    obj->buf_ind++;
+	myLinkedListAdd(obj, p, val);
 }
 
 /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
@@ -70,10 +69,7 @@ void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
     }
     
     if (current == index) {
-        obj->buf[obj->buf_ind].val = val;
-        obj->buf[obj->buf_ind].next = prev->next;
-        prev->next = &(obj->buf[obj->buf_ind]);
-        obj->buf_ind++;
+    	myLinkedListAdd(obj, prev, val);
 	}
 }
 
