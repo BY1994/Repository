@@ -1,5 +1,5 @@
 """
-14245 XOR
+12844 XOR
 
 세그먼트 트리
 https://8iggy.tistory.com/173
@@ -41,7 +41,7 @@ def search(i, start, end, left, right):
 
 def update(i, start, end, left, right, xor):
     if lazy[i] != 0:
-        segment_tree[i] ^= ((end-start+1)%2)*lazy[i]
+        segment_tree[i] ^= ((end-start+1)%2)*lazy[i] # xor 아님!!
         if start != end:
             lazy[i*2] ^= lazy[i]
             lazy[i*2+1] ^= lazy[i]
@@ -73,4 +73,4 @@ for _ in range(int(input())):
     if _input[0] == 1:
         update(1, 0, N-1, _input[1], _input[2], _input[3])
     else:
-        print(search(1, 0, N-1, _input[1], _input[1]))
+        print(search(1, 0, N-1, _input[1], _input[2]))
