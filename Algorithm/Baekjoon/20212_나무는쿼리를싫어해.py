@@ -10,6 +10,22 @@ https://www.acmicpc.net/board/view/61109
 
 Lazy segment tree
 https://www.geeksforgeeks.org/lazy-propagation-in-segment-tree/
+
+(1)
+내가 만들어본 큰 수 예시 => 틀렸습니다 일 듯
+4
+1 1 1 1000
+1 1 1000000000 500
+2 2 100 1
+2 2 100 2
+
+했더니 0 0 으로 오답이 나옴
+정답은 0 49500
+
+(2)
+런타임 에러 (IndexError) 해결!
+        # arr1 과 arr2는 index가 다름... dict 에러인 줄 알았는데...
+        update(1, 0, newN-1, findAstart[arr1[cur][1]], findAend[arr1[cur][2]], arr1[cur][3])
 """
 import sys
 
@@ -103,6 +119,7 @@ for i in range(N):
     setA.add(tmp[2])
 
 setA = list(setA)
+setA.sort() # sort를 안 해서 dict 에서 못 찾아서 그렇다고 생각
 newN = len(setA)
 newsetA = []
 for i in range(newN-1):
@@ -135,7 +152,8 @@ ans = [0] * arr2cnt
 for i in range(arr2cnt):
     while arr2[i][3] > cur:
         #print(f"#{findAstart[arr1[i][1]]}~{findAend[arr1[i][2]]}")
-        update(1, 0, newN-1, findAstart[arr1[i][1]], findAend[arr1[i][2]], arr1[i][3])
+        # arr1 과 arr2는 index가 다름... dict 에러인 줄 알았는데...
+        update(1, 0, newN-1, findAstart[arr1[cur][1]], findAend[arr1[cur][2]], arr1[cur][3])
         cur += 1
 
     #print(f"{findAstart[arr2[i][1]]}~{findAend[arr2[i][2]]}")
