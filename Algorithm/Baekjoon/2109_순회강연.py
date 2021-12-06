@@ -1,6 +1,8 @@
 """
 2109 순회강연
 
+반례 궁금함!!!
+
 문제 입력
 7
 20 1
@@ -45,7 +47,58 @@
 오답 80
 정답 110
 """
+visited = [0]*10001
 
+N = int(input())
+pos = []
+for i in range(N):
+    pos.append(list(map(int, input().split())))
+
+ans = 0
+
+if len(pos):
+    pos.sort(key = lambda x: -x[0])
+    for i in range(N):
+        for j in range(pos[i][1], 0, -1): # 1 일차까지만
+            if visited[j] == 0:
+                ans += pos[i][0]
+                visited[j] = 1
+                break
+
+print(ans)
+
+# 반례 못 찾음
+"""
+N = int(input())
+pos = []
+for i in range(N):
+    pos.append(list(map(int, input().split())))
+
+ans = 0
+
+if len(pos):
+    pos.sort(key = lambda x: (-x[1], -x[0]))
+    mtemp = 0
+    date = pos[0][1]
+    while(date):
+        for i in range(mtemp, N):
+            if pos[i][1] < date:
+                break
+            else:
+                if pos[mtemp][0] < pos[i][0]:
+                    mtemp = i
+
+        ans += pos[mtemp][0]
+        if mtemp == N-1:
+            break
+        mtemp += 1
+        date = min(date-1, pos[mtemp][1])
+
+print(ans)
+"""
+
+# 반례 못 찾음
+"""
 N = int(input())
 pos = []
 for i in range(N):
@@ -81,6 +134,7 @@ if len(pos):
 
 
 print(ans)
+"""
 
 # 반례
 # https://www.acmicpc.net/board/view/68574
