@@ -16,12 +16,13 @@ int main(void)
 	{
 		ans = 0; // 초기화 
 		scanf("%d %d", &a, &b);
-		num = b-a+1;
-		printf("###%d\n", 1<<30);
+// num = b-a+1;
+		num = b-a;
 		// 가장 끝자리부터 오면서 %값만 구하기
 		for (int i = 0; i<30; i++)
 		{
-			for (int j = 0; j < (num % (1 << (i+1))); j++)
+			for (int j = 0; j <= num; j++)
+//			for (int j = 0; j < (num % (1 << (i+1))); j++)
 			{
 				ans |= (a+j)&(1<<i); 
 			}

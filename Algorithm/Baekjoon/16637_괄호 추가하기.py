@@ -55,6 +55,12 @@ output)
 [1] 3 1 -13 -1 -73 -18  63  18 -18 972
 
 
+음수 최대값 고려 반례
+19
+0-9*9*9*9*9*9*9*9*4
+
+-172186884
+
 
 이 문제에서 고려해야하는 부분
 
@@ -110,13 +116,11 @@ while qlen > 0:
     # ind 길이 체크 => 종료 조건
     if ind == N-3:
         cur = calc(cur, equation[N-1], equation[N-2])
-        print("위", cur, ind, ans)
         # ind가 N-1에 도달할 때마다 cur값과 max_value를 비교
         if max_value < cur:
             max_value = cur
         continue
     if ind == N-1:
-        print("아래", cur, ind, ans)
         if max_value < cur:
             max_value = cur
         continue
