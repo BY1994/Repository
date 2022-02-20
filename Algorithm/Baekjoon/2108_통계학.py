@@ -20,7 +20,25 @@ N개의 수가 주어졌을 때, 네 가지 기본 통계값을 구하는 프로
 넷째 줄에는 범위를 출력한다.
 
 최초 작성 2019.02.27 PBY
+
+# Python Decimal
+https://m.blog.naver.com/herbdoc95/221574077380
+
+3
+0
+0
+-1
+넣으면 decimal round 값 -0 나옴
+
+dictionary in 체크 때문에 시간초과 나온 것으로 추정됨
+
+업데이트 2022.02.20 PBY
 """
+import decimal
+import sys
+input = sys.stdin.readline
+context = decimal.getcontext()
+context.rounding = decimal.ROUND_HALF_UP
 
 num = int(input())
 numbers = []
@@ -29,60 +47,30 @@ for _ in range(num):
     numbers.append(int(input()))
 
 # 산술평균
-average = sum(numbers)/len(numbers)
+# int <- because of -1
+print(int(round(decimal.Decimal(sum(numbers)) / decimal.Decimal(num),0)))
 
-# 반올림
-straverage = str(average)
-for idx in range(len(straverage)-1):
-    if straverage[idx] == '.':
-        if straverage[idx+1] >= '5': # 아스키코드값
-            average = int(straverage[:idx]) # 0 전까지 자름
-            average += 1
-        else:
-            average = int(straverage[:idx])
-print(average)
-        
 # 중앙값
-sortednumbers = sorted(numbers)
-print(sortednumbers[len(numbers)//2])
+numbers.sort()
+print(numbers[num//2])
 
 # 최빈값
-cnt = {}
+count = [0]*8002
 for n in numbers:
-    if n not in cnt:
-        cnt[n] = 1
-    else:
-        cnt[n] += 1
-print('cnt',cnt)
+    count[n+4000] += 1
 
-# 최빈값 구현        
-#cnt = [0] *  # 이건 5 크기만큼 만들어지는데,
-#for n in numbers:
-#    cnt[n-1] += 1
-
-# 한 번 최빈값을 구하고
-# 다시 돌면서 최빈값들을 리스트에 받아오기 => 이 과정을 한 번에 가능
-# 하면서 LIST에 넣으면 됨
-# 정렬하고 두 번째로 작은 값 찾기
-
-# 아니면 labmda함수로 한 번에 두 개 key를 가지고 정렬
-
-# 제일 큰 값
-max_ind_value = [0, 0]
-for n in cnt:
-    if max_ind_value[1] < cnt[n]:
-        max_ind_value[0] = n
-        max_ind_value[1] = cnt[n] 
-
-# 그 중 숫자가 제일 작은 값
-for n in cnt:
-    if max_ind_value[1] == cnt[n] and max_ind_value[0] > n:
-        max_ind_value[0] = n
-        max_ind_value[1] = cnt[n] 
-print(max_ind_value[0])
-
-# 그 숫자보다 하나 큰 값
-
+flag = 0
+_max = -1
+_max_ind = 0
+for n in range(8001):
+    if count[n] > _max:
+        _max = count[n]
+        _max_ind = n-4000
+        flag = 0
+    elif count[n] == _max and flag == 0:
+        _max_ind = n-4000
+        flag += 1
+print(_max_ind)
 
 # 범위
 print(max(numbers)-min(numbers))
