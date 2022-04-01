@@ -15,7 +15,29 @@ memo[x] > d 조건 넣으니까 반례 통과했다.
 
 1000000 넣으면 시간 초과 나는 것 같은데...
 memo 크기를 +1을 빼먹었더니 런타임 에러가 났다...
+
+BFS 로도 풀이 가능
 """
+# 모범답안
+# https://www.acmicpc.net/source/40177471
+"""
+#include<cstdio>
+#include<algorithm>
+int f(int n) {
+	int a,b;
+	if(n<2) 
+		return 0;
+	a=f(n/2)+n%2+1;
+	b=f(n/3)+n%3+1;
+	return std::min(a,b);
+}
+main(){
+	int n;
+	scanf("%d",&n);
+	printf("%d",f(n));
+}
+"""
+
 N = int(input())
 memo = [10**6+1] * (10**6+1)
 
