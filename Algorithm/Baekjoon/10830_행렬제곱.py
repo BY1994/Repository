@@ -1,5 +1,9 @@
 """
-10830 행렬 제곱 미제출
+10830 행렬 제곱
+
+틀렸습니다 => 1개가 곱해질 때도 1000 보다 큰 인풋이 들어올 수 있다는 걸 고려 안 함
+https://www.acmicpc.net/board/view/70541
+그러면 80% 에서 틀림
 """
 def mult(p):
     global N
@@ -42,7 +46,7 @@ for _ in range(N):
 result = [[[0 for i in range(N)] for j in range(N)] for k in range(2)]
 for i in range(N):
     for j in range(N):
-        result[0][i][j] = origin[i][j]
+        result[0][i][j] = origin[i][j] % 1000
 mult(B)
 
 for i in range(N):
