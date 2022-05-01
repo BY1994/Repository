@@ -18,8 +18,80 @@
 사진틀에 사진이 게재된 최종 후보의 학생 번호를 증가하는 순서대로 출력한다.
 
 최초 작성 2019.03.06 PBY
+업데이트 2022.05.01 PBY
+
+
+100% 에서 틀리는 경우 반례
+https://www.acmicpc.net/board/view/71598
+후보의 수가 사진틀의 개수보다 적을 때 문제
+
+입력
+3
+4
+1 2 1 2
+    
+정답
+1 2
+
+잘못된 출력
+0 1 2
 """
 
+N = int(input())
+K = int(input())
+rec = list(map(int, input().split()))
+
+student = [0]*101
+pic = [0]*N
+time = [0]*N
+cur_time = 1
+
+for i in range(K):
+    student[rec[i]] += 1 # recommend 횟수
+    # 반드시 게시
+    # 비어있거나 현재까지 추천받은 횟수가 가장 적거나
+    _min = 1002
+    _ind = 0
+    _time = 1002
+    for j in range(N):
+        if pic[j] == 0: # 비어있거나
+            _ind = j
+            break
+
+        if pic[j] == rec[i]:
+            _ind = j
+            break
+
+        if student[pic[j]] < _min:
+            _min = student[pic[j]]
+            _time = time[j]
+            _ind = j
+        elif student[pic[j]] == _min:
+            if time[j] < _time:
+                _time = time[j]
+                _ind = j
+
+    # 결정된 _ind 자리에 게시
+    # 게시된 시점 기록
+    # 기존 학생 삭제시 추천받은 횟수 0 초기화
+    if pic[_ind] != rec[i]:
+        if pic[_ind] != 0:
+            student[pic[_ind]] = 0
+        pic[_ind] = rec[i]
+        time[_ind] = cur_time
+        cur_time += 1
+
+pic.sort()
+for i in range(N):
+    if pic[i] == 0:
+        continue
+    print(pic[i], end=" ")
+
+# 틀렸습니다 => 후보의 수가 사진틀의 개수보다 적을 때 문제
+# print(*sorted(pic))
+
+# 틀렸습니다
+"""
 N = int(input()) # 사진틀 크기
 recom = int(input()) # 학생들의 추천 횟수
 candi = input().split()
@@ -63,7 +135,7 @@ for student in range(recom):
                         picrecom[minnum] = 1                
                         
 print(' '.join(map(str,sorted(pictures))))
-
+"""
 
 """
 다음의 부분은 아예 필요가 없었다. for else로 들어들어 온 경우에는 그냥 내가 min 자리를 차지하면 된다.
