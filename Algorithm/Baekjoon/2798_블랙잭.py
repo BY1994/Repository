@@ -15,8 +15,32 @@ N장의 카드에 써져 있는 숫자가 주어졌을 때, M을 넘지 않으�
 첫째 줄에 M을 넘지 않으면서 M에 최대한 가까운 카드 3장의 합을 출력한다.
 
 최초작성 2019.03.03 PBY
+한번 더 풀이 2022.05.14 PBY
 """
+# 2022.05.14 버전
+# 푼 줄 모르고 한 번 더 품
+N, M = map(int, input().split())
+cards = list(map(int, input().split()))
+ans = 0
 
+def getcard(cur, n, s):
+    global ans, N, M
+
+    if s > M:
+        return
+    if n == 3:
+        ans = max(ans, s)
+        return
+
+    for i in range(cur+1, N):
+        getcard(i, n+1, s+cards[i])
+
+getcard(-1, 0, 0)
+
+print(ans)
+
+# 2019.03.03 버전
+"""
 N, M = list(map(int, input().split()))
 cards = list(map(int, input().split()))
 
@@ -36,7 +60,7 @@ for i in range(N):
                     
 # 출력
 print(M - diff)
-            
+"""          
 
 # visual studio는 실행시 ctrl + f5
 
