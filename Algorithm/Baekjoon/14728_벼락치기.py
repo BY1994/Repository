@@ -14,6 +14,8 @@ dp[i][:k] 구간은 채워지지 않기 때문에 (dp[i-1][:k] 로 채워줘야 
 잘못된 값이 나올 수 밖에 없습니다.
 """
 
+# 오늘 1535 문제를 풀다가 잘못된 걸 발견
+# i 가 0부터 시작하려면 i-1 인덱스를 쓰면 안 됨
 N, T = map(int, input().split())
 chapters = []
 DP = [[0 for i in range(10001)] for j in range(100)]
