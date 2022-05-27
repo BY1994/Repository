@@ -37,6 +37,10 @@ https://bcnam.tistory.com/m/75
 
 https://www.geeksforgeeks.org/introduction-to-algorithms/
 
+![Data Structures Mindmap](https://i2.wp.com/www.rubyguides.com/wp-content/uploads/2019/04/Algorithms-Data-Structures.png?resize=1338%2C673&ssl=1)
+
+https://www.rubyguides.com/2019/04/ruby-data-structures/
+
 ![Algorithm Classification Mind Map, Mindmap | Mind map, Algorithm, Data  science learning](https://i.pinimg.com/736x/89/23/f7/8923f7d385e70674afe8580e1f3aa0c6.jpg)
 
 https://www.pinterest.co.kr/pin/120119515046918349/
@@ -48,6 +52,12 @@ https://x-wei.github.io/tag/algorithm3.html
 ![img](https://cdn.jsdelivr.net/gh/Auto-SK/CDN/Articles/Data-Structure-and-Algorithm-Mind-Map/data-structure-and-algorithm-mind-map.png)
 
 https://www.sunkai.tech/algorithm/data-structure-and-algorithm-mind-map.html
+
+![알고리즘 문제풀이 로드맵 이미지](https://raw.githubusercontent.com/stack07142/BOJ/master/img/Algorithm%20PS%20Roadmap_v0.1.png)
+
+https://lunarscents.github.io/2019/05/29/algorithm-roadmap/
+
+
 
 ### Set
 
