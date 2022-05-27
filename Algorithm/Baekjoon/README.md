@@ -23,7 +23,6 @@ https://statelyworld.com/data-structures-and-algorithms-with-javascript/
 https://www.c-sharpcorner.com/article/learn-about-data-structures-and-algorithm-dsa/
 
 <iframe src='https://www.xmind.net/embed/RK9B/' width='750' height='523' frameborder='0' scrolling='no' allowfullscreen="true"></iframe>
-
 https://www.xmind.net/m/RK9B/#
 
 ![img](https://t1.daumcdn.net/cfile/tistory/2275BB4B57DA470501)
@@ -49,6 +48,16 @@ https://x-wei.github.io/tag/algorithm3.html
 ![img](https://cdn.jsdelivr.net/gh/Auto-SK/CDN/Articles/Data-Structure-and-Algorithm-Mind-Map/data-structure-and-algorithm-mind-map.png)
 
 https://www.sunkai.tech/algorithm/data-structure-and-algorithm-mind-map.html
+
+### Set
+
+- Disjoint Set (Union Find)
+
+| 문제 번호 | 문제 이름     | 설명                                                       |
+| --------- | ------------- | ---------------------------------------------------------- |
+| 4195      | 친구 네트워크 | 사람 둘이 주어지면 union 하고 총 명수는 최상위 부모가 관리 |
+
+※ Find 함수에서 최상위 부모를 찾으면, 부모를 최상위 부모로 업데이트해야 시간이 크게 단축됨
 
 
 
