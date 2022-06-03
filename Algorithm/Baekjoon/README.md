@@ -81,6 +81,14 @@ https://lunarscents.github.io/2019/05/29/algorithm-roadmap/
 
 
 
+### 그리디 (Greedy)
+
+| 문제 번호 | 문제 이름  | 설명                                         |
+| --------- | ---------- | -------------------------------------------- |
+| 10162     | 전자레인지 | 배수 관계의 수들을 이용해서 최소 횟수 구하기 |
+
+
+
 ### 동적 계획법 (Dynamic Programming)
 
 - 배낭 문제 (Knapsack Problem)
