@@ -15,6 +15,14 @@ DP 의 가장 위를 max 를 취해주지 않았기 때문이었다.
 26 6 25 18 18 18 4 44 68
 1
 정답 = 26 + 44 + 68 = 138
+
+질문 게시판의 반례 만들기 (랜덤 생성)
+https://www.acmicpc.net/board/view/16440
+8
+43 5 21 88 54 86 92 59
+2
+정답 400
+틀린 답 384
 """
 
 # 0 번은 무조건 아무것도 없다가 나를 추가하는 케이스라고 잘못 생각했는데,
@@ -42,6 +50,49 @@ for i in range(limit, N):
 
 print(DP[N-1][2])
 
+
+# input / output 생성
+"""
+from random import randrange
+fread = open("2616_input.txt", 'w')
+fwrite = open("2616_output.txt", 'w')
+for tc in range(100):
+    N = randrange(3,11)
+    fread.write(f'{N}\n')
+    trains = []
+    for i in range(N):
+        trains.append(randrange(1,101))
+    fread.write(f"{' '.join(str(x) for x in trains)}\n")
+    limit = randrange(1,N//3+1)
+    fread.write(f'{limit}\n')
+
+    # 비교 코드: https://velog.io/@kimdukbae/BOJ-2616-%EC%86%8C%ED%98%95%EA%B8%B0%EA%B4%80%EC%B0%A8-Python
+    # 구간합 계산
+    S = [0]
+    value = 0
+    for t in trains:
+        value += t
+        S.append(value)
+
+    dp = [[0] * (N + 1) for _ in range(4)]
+
+    # 점화식을 이용해 최댓값 탐색
+    for n in range(1, 4):
+        for m in range(n * limit, N + 1):
+            # n = 1일 때 선택한 객차가 없으므로
+            # 전에 계산한 구간합과 현재 계산하는 구간합 중 최댓값을 계산해 갱신해준다.
+            if n == 1:
+                dp[n][m] = max(dp[n][m - 1], S[m] - S[m - limit])
+
+            # 점화식
+            else:
+                dp[n][m] = max(dp[n][m - 1], dp[n - 1][m - limit] + S[m] - S[m - limit])
+            # print_dp(dp)
+
+    fwrite.write(f"{dp[3][N]}\n")
+fread.close()
+fwrite.close()
+"""
 
 # 채점 프로그램
 """
@@ -144,3 +195,4 @@ for i in range(limit, N):
 
 print(max(DP[N-1]))
 """
+
