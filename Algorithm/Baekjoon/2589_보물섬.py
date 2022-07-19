@@ -1,4 +1,3 @@
-""""""
 """
 보물섬
 
@@ -9,12 +8,54 @@ LWLWLWW
 LWLWLLL
 WLLWLWW
 
-2019.04.01 PBY 최초작성
+BFS, Brute Force
+
+2019.04.01 PBY 최초작성 (미완성)
+2022.07.19 PBY 통과
 """
 
-# BFS
+# 2022.07.19 통과
 
-#
+N, M = map(int, input().split())
+mintime = 0
+mymap = []
+for i in range(N):
+    mymap.append(input())
+
+visited = [[0 for i in range(M)] for j in range(N)]
+visit_check = 0
+
+for sx in range(N):
+    for sy in range(M):
+        if mymap[sx][sy] == 'W':
+            continue
+        visit_check += 1
+        q = [[sx, sy, 0]]
+        qs = 0
+        qe = 1
+        visited[sx][sy] = visit_check
+
+        while qs < qe:
+            x, y, dist = q[qs]
+            qs += 1
+
+            mintime = max(mintime, dist)
+
+            for nx, ny in (x-1, y), (x+1, y), (x, y-1), (x, y+1):
+                if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                    continue
+                if mymap[nx][ny] == 'W':
+                    continue
+                if visited[nx][ny] == visit_check:
+                    continue
+                visited[nx][ny] = visit_check
+                q.append([nx, ny, dist+1])
+                qe += 1
+
+print(mintime)
+
+# 2019.04.01 작성본 (미완성)
+# BFS
 import copy
 from collections import deque
 
