@@ -86,6 +86,7 @@ https://lunarscents.github.io/2019/05/29/algorithm-roadmap/
 | 1918      | 후위 표기식  | infix 형태의 연산을 postfix 형태로 변환                  |
 | 1935      | 후위 표기식2 | postfix 형태의 연산을 계산하기                           |
 | 2504      | 괄호의 값    | 괄호열을 수식처럼 계산하기                               |
+| 3986      | 좋은 단어    | 스택 기초 (A와 B로 쌍이 맞는지 확인)                     |
 
 
 
