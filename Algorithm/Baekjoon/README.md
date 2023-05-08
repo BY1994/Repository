@@ -70,6 +70,7 @@ https://lunarscents.github.io/2019/05/29/algorithm-roadmap/
 | 27960     | 사격 내기               | 2의 제곱수들의 합으로 점수가 이루어질 때, XOR 한 결과 출력하기 (숏코딩 가능) |
 | 24578     | Ultimate Binary Watch   | 2진수로 표현했을 때 1 이면 * 0이면 . 으로 출력하기           |
 | 24389     | 2의 보수                | 원래 수와 2의 보수의 서로 다른 비트 개수 세기                |
+| 26512     | Complimentary           | 음수 (2의 보수) 2진수 8 자리로 출력하기                      |
 
 
 
